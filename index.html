@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Convertisseur caractères utf8 en ISO-8859-1</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h1>Convertisseur caractères utf8 en ISO-8859-1</h1>
+		<div class="row">
+			<div class="col-lg-6 mx-auto">
+				<div>
+					<p>Entrez le texte ici :</p>
+					<textarea class="form-control" id="input" rows="30"></textarea>
+				</div>
+				<div>
+					<button id="button" type="button" class="btn btn-primary">Clic !</button>
+				</div>
+			</div>
+			<div class="col-lg-6 mx-auto">
+				<button id="copy" type="button" class="btn btn-secondary" data-target="#trad">Copier le texte traduit</button>
+				<p id="trad"></p>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script>
+let text = document.getElementById("input");
+let button = document.getElementById("button");
+let trad = document.getElementById("trad");
+
+button.addEventListener("click", function(){
+let newText = text.value
+.replaceAll("Ã©","é")
+.replaceAll("Ãª","ê")
+.replaceAll("Ã¨","è")
+.replaceAll("Ã«","ë")
+.replaceAll("Ã‰","É")
+.replaceAll("Ãˆ","È")
+.replaceAll("ÃŠ","Ê")
+.replaceAll("Ã‹","Ë")
+.replaceAll("Ã»","û")
+.replaceAll("Ã¹","ù")
+.replaceAll("Ã´","ô")
+.replaceAll("Ã”","Ô")
+.replaceAll("Å“","œ")
+.replaceAll("â€™","'")
+.replaceAll("â€“","-")
+.replaceAll("Â»","»")
+.replaceAll("Â«","«")
+.replaceAll("Ã‡","Ç")
+.replaceAll("Ã§","ç")
+.replaceAll("Ã®","î")
+.replaceAll("ÃŽ","Ï")
+.replaceAll("Ã¯","ï")
+.replaceAll("Ã¢","â")
+.replaceAll("Ã€","À")
+.replaceAll("Ã ","à");
+
+trad.innerText = newText;
+})
+
+//Copier le texte traduit
+let btncopy = document.querySelector('#copy');
+if(btncopy) {
+    btncopy.addEventListener('click', docopy);
+}
+
+function docopy() {
+
+    // Cible de l'élément qui doit être copié
+    let target = this.dataset.target;
+    let fromElement = document.querySelector(target);
+    if(!fromElement) return;
+
+    // Sélection des caractères concernés
+    let range = document.createRange();
+    let selection = window.getSelection();
+    range.selectNode(fromElement);
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    try {
+        // Exécution de la commande de copie
+        let result = document.execCommand('copy');
+        if (result) {
+            // La copie a réussi
+            alert('Copié !');
+        }
+    }
+    catch(err) {
+        // Une erreur est surevnue lors de la tentative de copie
+        alert(err);
+    }
+
+    // Fin de l'opération
+    selection = window.getSelection();
+    if (typeof selection.removeRange === 'function') {
+        selection.removeRange(range);
+    } else if (typeof selection.removeAllRanges === 'function') {
+        selection.removeAllRanges();
+    }
+}
+</script>
+</html>
