@@ -11,17 +11,27 @@
 		<h1>Convertisseur caractères utf8 en ISO-8859-1</h1>
 		<div class="row">
 			<div class="col-lg-6 mx-auto">
-				<div>
-					<p>Entrez le texte ici :</p>
-					<textarea class="form-control" id="input" rows="30"></textarea>
-				</div>
-				<div>
-					<button id="button" type="button" class="btn btn-primary">Clic !</button>
+				<div class="row">
+					<div class="col-11">
+						<p><b><u>Entrez le texte ici :</b></u></p>
+						<div>
+							<textarea class="form-control" id="input" rows="15"></textarea>
+						</div>
+						<div>
+							<button id="button" type="button" class="btn btn-primary mt-2">Convertir</button>
+						</div>
+					</div>
+					<div class="col-1 d-flex">
+						<div class="vr"></div>
+					</div>
 				</div>
 			</div>
 			<div class="col-lg-6 mx-auto">
-				<button id="copy" type="button" class="btn btn-secondary" data-target="#trad">Copier le texte traduit</button>
-				<p id="trad"></p>
+				<p><b><u>Retrouvez le texte converti ici :</b></u></p>
+				<div class="overflow-auto" style="height:370px" id="trad"></div>
+				<div>
+					<button id="copy" type="button" class="btn btn-secondary" data-target="#trad">Copier</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -35,6 +45,7 @@ let trad = document.getElementById("trad");
 button.addEventListener("click", function(){
 let newText = text.value
 .replaceAll("Ã©","é")
+.replaceAll("áµ‰","e")
 .replaceAll("Ãª","ê")
 .replaceAll("Ã¨","è")
 .replaceAll("Ã«","ë")
@@ -51,6 +62,9 @@ let newText = text.value
 .replaceAll("â€“","-")
 .replaceAll("Â»","»")
 .replaceAll("Â«","«")
+.replaceAll("â€¦","...")
+.replaceAll("â€¯"," ")
+.replaceAll("â‚‚","2")
 .replaceAll("Ã‡","Ç")
 .replaceAll("Ã§","ç")
 .replaceAll("Ã®","î")
